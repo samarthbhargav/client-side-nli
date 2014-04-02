@@ -55,4 +55,18 @@ public class Student {
 	public Double getPercentage(Double maxMarks) {
 		return getTotal() / maxMarks;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		String SEP = " ";
+		builder.append("Name: " + getName());
+		builder.append(SEP + "USN: " + getUsn());
+		for(String s : scores.keySet()) {
+			builder.append(SEP + s + ": " + scores.get(s));
+		}
+		builder.append(SEP + "Total: " + getTotal());
+		// TODO Add Percentage and Class
+		return builder.toString();
+	}
 }

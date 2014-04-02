@@ -1,5 +1,16 @@
 package com.nanobi.client.service.model;
 
-public class ServiceRequest {
+import java.util.HashMap;
+import java.util.Map;
 
+public class ServiceRequest {
+	Map<String, Object> params = new HashMap<String, Object>();
+
+	public Object getParam(String param) {
+		return params.get(param);
+	}
+
+	public void setParam(String param, Object value) {
+		params.put(param, value);
+	}
 }
