@@ -4,8 +4,11 @@ public class DaoConstants {
 	public static final String DB_NAME = "oxford_reporting";
 	public static final String STUDENT_COLLECTION_NAME = "student";
 	
+	public static final Double MAX_MARKS = 900.0;
 	
-	
+	public static final String INTERAL_SUFFIX = "_INT";
+	public static final String EXTERNAL_SUFFIX = "_EXT";
+	public static final String TOTAL_SUFFIX = "_TOT";
 	
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_USN = "usn";

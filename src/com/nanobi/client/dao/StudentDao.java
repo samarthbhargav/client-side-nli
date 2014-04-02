@@ -4,7 +4,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -57,7 +56,15 @@ public class StudentDao {
 	
 	
 	public List<Student> getStudentsWithClass(ResultClass c) {
-		return null;
+		List<Student> allStudents = getStudents();
+		List<Student> students = new ArrayList<Student>();
+		for(Student s: allStudents) {
+		    ResultClass studentClass = ResultClass.getClassForScore( s.getPercentage( DaoConstants.MAX_MARKS ) );
+		    if(c == studentClass) {
+		        students.add( s );
+		    }
+		}
+		return students;
 	}
 	
 	public List<Student> getStudents() {
