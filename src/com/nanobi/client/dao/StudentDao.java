@@ -59,4 +59,8 @@ public class StudentDao {
 	public List<Student> getStudentsWithClass(ResultClass c) {
 		return null;
 	}
+	
+	public List<Student> getStudents() {
+		return students; 
+	}
 }
