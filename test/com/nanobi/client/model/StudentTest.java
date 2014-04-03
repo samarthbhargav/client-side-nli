@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.nanobi.client.constants.DaoConstants;
-
+import com.nanobi.client.constants.ResultClass;
 import com.nanobi.client.dao.StudentDao;
 
 
@@ -19,13 +19,11 @@ public class StudentTest
     {
         StudentDao dao = new StudentDao();
         List<Student> students = dao.getStudents();
-        Student s = students.get( 0 );
-
-        System.out.println( s.getName() );
-        System.out.println( s.getUsn() );
-        System.out.println( s.getTotal() );
-        System.out.println( s.getPercentage( DaoConstants.MAX_MARKS ) );
-
+        for(Student s : students) {
+        	System.out.println(s.getTotal() + " " + s.getPercentage(DaoConstants.MAX_MARKS));
+        	System.out.println(ResultClass.getClassForScore(s.getPercentage(DaoConstants.MAX_MARKS)));
+        	System.out.println();
+        }
     }
 
 }
