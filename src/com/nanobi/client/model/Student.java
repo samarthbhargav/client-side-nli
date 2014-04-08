@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.nanobi.client.constants.DaoConstants;
+import com.nanobi.client.constants.ResultClass;
 
 
 public class Student
@@ -79,7 +80,31 @@ public class Student
         return 100 * ( getTotal() / maxMarks );
     }
 
-
+    public boolean hasFailed() {
+        boolean fail = false;
+        for(String subj : scores.keySet()) {
+            if(subj.endsWith( DaoConstants.EXTERNAL_SUFFIX)) {
+                if(scores.get( subj ) < DaoConstants.MARKS_EXTERNAL_MIN) {
+                    fail = true;
+                }
+            }
+            if(subj.endsWith( DaoConstants.TOTAL_SUFFIX)) {
+                if(scores.get( subj ) < DaoConstants.MARKS_TOTAL_MIN) {
+                    fail = true;
+                }
+            }
+        }
+        return fail;
+    }
+    
+    public ResultClass getResultClass() {
+        if(hasFailed())
+            return ResultClass.FAIL;
+        else
+            return ResultClass.getClassForScore( getPercentage( DaoConstants.MARKS_MAX ) );
+    }
+    
+    
     @Override
     public String toString()
     {

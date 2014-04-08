@@ -20,8 +20,8 @@ public class StudentTest
         StudentDao dao = new StudentDao();
         List<Student> students = dao.getStudents();
         for(Student s : students) {
-        	System.out.println(s.getTotal() + " " + s.getPercentage(DaoConstants.MAX_MARKS));
-        	System.out.println(ResultClass.getClassForScore(s.getPercentage(DaoConstants.MAX_MARKS)));
+        	System.out.println(s.getName() + " " + s.getTotal() + " " + s.getPercentage(DaoConstants.MARKS_MAX));
+        	System.out.println(s.getResultClass());
         	System.out.println();
         }
     }

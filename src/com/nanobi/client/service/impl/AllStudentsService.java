@@ -45,7 +45,7 @@ public class AllStudentsService implements IService {
 		List<Student> students = (List<Student>) response.getParam(PARAM_STUDENT_LIST);
 		StringBuilder ret = new StringBuilder();
 		for(Student s : students) {
-			ret.append(formatStudent(s) + "<br/>");
+			ret.append(formatStudent(s) + "<br/>\n");
 		}
 		return ret.toString();
 	}

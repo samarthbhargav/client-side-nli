@@ -59,8 +59,7 @@ public class StudentDao {
 		List<Student> allStudents = getStudents();
 		List<Student> students = new ArrayList<Student>();
 		for(Student s: allStudents) {
-		    ResultClass studentClass = ResultClass.getClassForScore( s.getPercentage( DaoConstants.MAX_MARKS ) );
-		    if(c == studentClass) {
+		    if(c == s.getResultClass()) {
 		        students.add( s );
 		    }
 		}
