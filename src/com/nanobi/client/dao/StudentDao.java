@@ -8,7 +8,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.nanobi.client.constants.DaoConstants;
+import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.constants.ResultClass;
 import com.nanobi.client.model.Student;
 
@@ -23,8 +23,8 @@ public class StudentDao {
 	private static void loadStudents() throws UnknownHostException {
 		if (students == null) {
 			MongoClient client = new MongoClient();
-			DBCollection collection = client.getDB(DaoConstants.DB_NAME)
-					.getCollection(DaoConstants.STUDENT_COLLECTION_NAME);
+			DBCollection collection = client.getDB(StudentDaoConstants.DB_NAME)
+					.getCollection(StudentDaoConstants.STUDENT_COLLECTION_NAME);
 
 			students = new ArrayList<Student>();
 
@@ -38,9 +38,9 @@ public class StudentDao {
 
 	private static Student convertToStudent(DBObject object) {
 		Student student = new Student();
-		student.setName(getFieldOrNull(object, DaoConstants.FIELD_NAME));
-		student.setUsn(getFieldOrNull(object, DaoConstants.FIELD_USN));
-		for(String subject: DaoConstants.SUBJECTS_LIST) {
+		student.setName(getFieldOrNull(object, StudentDaoConstants.FIELD_NAME));
+		student.setUsn(getFieldOrNull(object, StudentDaoConstants.FIELD_USN));
+		for(String subject: StudentDaoConstants.SUBJECTS_LIST) {
 			student.addScore(subject, getScoreForSubject(object, subject));
 		}
 		return student;

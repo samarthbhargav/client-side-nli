@@ -1,6 +1,6 @@
 package com.nanobi.client.constants;
 
-public class DaoConstants {
+public class StudentDaoConstants {
 	public static final String DB_NAME = "oxford_reporting";
 	public static final String STUDENT_COLLECTION_NAME = "student";
 	

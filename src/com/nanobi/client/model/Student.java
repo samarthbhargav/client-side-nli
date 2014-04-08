@@ -3,7 +3,7 @@ package com.nanobi.client.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.nanobi.client.constants.DaoConstants;
+import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.constants.ResultClass;
 
 
@@ -67,7 +67,7 @@ public class Student
     {
         Double total = 0.0;
         for ( String subj : scores.keySet() ) {
-            if ( subj.endsWith( DaoConstants.TOTAL_SUFFIX ) ) {
+            if ( subj.endsWith( StudentDaoConstants.TOTAL_SUFFIX ) ) {
                 total += scores.get( subj );
             }
         }
@@ -83,13 +83,13 @@ public class Student
     public boolean hasFailed() {
         boolean fail = false;
         for(String subj : scores.keySet()) {
-            if(subj.endsWith( DaoConstants.EXTERNAL_SUFFIX)) {
-                if(scores.get( subj ) < DaoConstants.MARKS_EXTERNAL_MIN) {
+            if(subj.endsWith( StudentDaoConstants.EXTERNAL_SUFFIX)) {
+                if(scores.get( subj ) < StudentDaoConstants.MARKS_EXTERNAL_MIN) {
                     fail = true;
                 }
             }
-            if(subj.endsWith( DaoConstants.TOTAL_SUFFIX)) {
-                if(scores.get( subj ) < DaoConstants.MARKS_TOTAL_MIN) {
+            if(subj.endsWith( StudentDaoConstants.TOTAL_SUFFIX)) {
+                if(scores.get( subj ) < StudentDaoConstants.MARKS_TOTAL_MIN) {
                     fail = true;
                 }
             }
@@ -101,7 +101,7 @@ public class Student
         if(hasFailed())
             return ResultClass.FAIL;
         else
-            return ResultClass.getClassForScore( getPercentage( DaoConstants.MARKS_MAX ) );
+            return ResultClass.getClassForScore( getPercentage( StudentDaoConstants.MARKS_MAX ) );
     }
     
     
