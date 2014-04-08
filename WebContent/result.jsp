@@ -1,3 +1,5 @@
+<%@page import="com.nanobi.client.communication.TranslationResult"%>
+<%@page import="com.nanobi.client.communication.CommunicationServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,6 +9,10 @@
         response.sendRedirect( "login.jsp" );
         return;
     }
+
+	CommunicationServlet comm = new CommunicationServlet();
+	TranslationResult result = comm.getTranslation( request.getParameter( Params.NLI_PARAM_QUERY ) );
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,7 +31,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<title>Dashboard | NLI Client</title>
+<title>Results | NLI Client</title>
 </head>
 <body>
 <div class="container" >
@@ -33,13 +39,9 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 white-bg" >
-			<a href="logout.jsp" >Logout</a> <br/>
-			<h2 class="text-center">Natural Language - Student Query System Dashboard</h2>
-			<form class="form-signin" role="form" action="result.jsp" method="post">
-					<input id="query" name="query" type="text" class="form-control" placeholder="Speak or Type your query" required="" autofocus="" x-webkit-speech>
-					<br> 
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Query</button>
-			</form>
+			<a href="dashboard.jsp">Go Back to Dashboard</a>
+			<h2 class="text-center">Results of Query: </h2>
+			<%=	result	%>
 		</div>
 	</div> 
 </div>
