@@ -10,26 +10,51 @@
 
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link type="text/css" href="css/bootstrap.css" rel="stylesheet" >
+<link type="text/css" href="css/bootstrap.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<%@ page import="com.nanobi.client.dao.UserDao" %>
 <title>Login | NLI Client</title>
 </head>
 <body>
-	
-	<form class="form-signin" role="form">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="UserName" required="" autofocus="">
-        <input type="password" class="form-control" placeholder="Password" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-	
-	
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+	<%
+		String message = null;
+	    if ( "POST".equalsIgnoreCase( request.getMethod() ) ) {
+	        
+			UserDao dao = new UserDao();
+			String uname = request.getParameter( "uname" );
+			String pass = request.getParameter("pass");
+			if(uname == null || pass ==null) {
+			    message ="Wrong POST";
+			} else {
+			    if(dao.authenticate( uname, pass )) {
+			        response.sendRedirect( "dashboard.jsp" );
+			    } else {
+			        message = "Username or password incorrect";
+			    }
+			}
+	    } 
+	%>
+	<form class="form-signin" role="form" action="login.jsp" method="post">
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<input id="uname" name="uname"type="text" class="form-control" placeholder="UserName" required="" autofocus=""> 
+			<input id="pass" name="pass" type="password" class="form-control" placeholder="Password" required="">
+			<%
+			if(message != null) { %>
+			<p><strong> <%= message %></strong></p>
+			<%}
+			%>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
+	</form>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
