@@ -2,7 +2,7 @@ package com.nanobi.client.mapping;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.nanobi.client.except.ServiceMappingDoesNotExist;
@@ -12,20 +12,34 @@ import com.nanobi.client.service.model.ServiceResponse;
 
 public class ServiceMapping
 {
-    Map<ArrayList<String>, String> map = new HashMap<ArrayList<String>, String>();
+    private static final ServiceMapping INSTANCE = new ServiceMapping();
     
-    public void setMapping(ArrayList<String> mapping, String service) {
+	private static Map<List<String>, String> map = new HashMap<List<String>, String>();
+    
+    private ServiceMapping() {
+    	
+    }
+    
+    public static ServiceMapping getInstance() {
+    	return INSTANCE;
+    }
+    
+    public void setMapping(List<String> mapping, String service) {
         Collections.sort( mapping );
         map.put( mapping, service );
     }
     
-    public String getMappingFor(ArrayList<String> mapping) {
+    public String getMappingFor(List<String> mapping) {
         Collections.sort( mapping );
         return map.get( mapping );
     }
     
+    public void clearAllMappings() {
+    	map.clear();
+    }
+    
     @SuppressWarnings ( "unchecked")
-    public ServiceResponse getService(ArrayList<String> mappingTokens, Map<String,String> params) throws Exception { // TODO remove generic exception
+    public ServiceResponse getService(List<String> mappingTokens, Map<String,String> params) throws Exception { // TODO remove generic exception
         String className = getMappingFor( mappingTokens );
         if(className == null) {
             throw new ServiceMappingDoesNotExist("Mapping for " + mappingTokens.toString() + " does not exist");
@@ -38,7 +52,7 @@ public class ServiceMapping
     }
     
     @SuppressWarnings ( "unchecked")
-    public String getServiceResponseAsString(ArrayList<String> mappingTokens, Map<String,String> params) throws Exception {
+    public String getServiceResponseAsString(List<String> mappingTokens, Map<String,String> params) throws Exception {
         String className = getMappingFor( mappingTokens );
         if(className == null) {
             throw new ServiceMappingDoesNotExist("Mapping for " + mappingTokens.toString() + " does not exist");
@@ -49,4 +63,17 @@ public class ServiceMapping
         String response = service.getResponseAsString( req );
         return response;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for(List<String> mapping : map.keySet()) {
+			builder.append( mapping + " -> " + map.get(mapping) );
+		}
+		
+		return builder.toString();
+	}
+    
+    
+    
 }

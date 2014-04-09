@@ -1,3 +1,7 @@
+<%@page import="com.nanobi.client.service.IService"%>
+<%@page import="com.nanobi.client.mapping.ServiceMapping"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.nanobi.client.utils.Utils"%>
 <%@page import="com.nanobi.client.communication.TranslationResult"%>
 <%@page import="com.nanobi.client.communication.CommunicationServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,7 +16,9 @@
 
 	CommunicationServlet comm = new CommunicationServlet();
 	TranslationResult result = comm.getTranslation( request.getParameter( Params.NLI_PARAM_QUERY ) );
-	
+	ArrayList<String> mappings = Utils.constructMappingFromResult(result);
+	ServiceMapping mapper = ServiceMapping.getInstance();
+	String resultString = mapper.getServiceResponseAsString(mappings, null);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,7 +47,7 @@
 		<div class="col-md-8 white-bg" >
 			<a href="dashboard.jsp">Go Back to Dashboard</a>
 			<h2 class="text-center">Results of Query: </h2>
-			<%=	result	%>
+			<%=	resultString %>
 		</div>
 	</div> 
 </div>
