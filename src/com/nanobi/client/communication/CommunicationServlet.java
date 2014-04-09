@@ -3,7 +3,6 @@
  */
 package com.nanobi.client.communication;
 
-import java.io.InputStream;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,7 +17,6 @@ public class CommunicationServlet {
     
     public TranslationResult getTranslation(String query) {
         TranslationResult result = null;
-        InputStream in = null;
 
         try {
             HttpClient client = new HttpClient();
@@ -28,7 +26,7 @@ public class CommunicationServlet {
             method.addParameter(Params.NLI_PARAM_QUERY, query);
             method.addParameter(Params.NLI_PARAM_AUTHTOKEN, Params.NLI_PARAM_AUTHTOKEN_VALUE);
             method.addParameter( Params.NLI_PARAM_LAST_TRANSLATION , "");
-            
+            method.addParameter(Params.NLI_PARAM_PRUNE, Params.NLI_PARAM_PRUNE_VALUE);
             
             
             int statusCode = client.executeMethod(method);
