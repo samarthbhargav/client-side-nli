@@ -41,10 +41,8 @@
 </head>
 <body>
 <div class="container" >
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 white-bg" >
+	<div class="row">	
+		<div class="col-md-12 white-bg" >
 			<a href="dashboard.jsp">Go Back to Dashboard</a>
 			<h2 class="text-center">Results of Query: </h2>
 			<%=	resultString %>

@@ -17,10 +17,9 @@ public class ServiceMapping
 	private static Map<List<String>, String> map = new HashMap<List<String>, String>();
     
     private ServiceMapping() {
-    	
     }
     
-    public static ServiceMapping getInstance() {
+    public static ServiceMapping getInstance() { 
     	return INSTANCE;
     }
     
@@ -53,6 +52,7 @@ public class ServiceMapping
     
     @SuppressWarnings ( "unchecked")
     public String getServiceResponseAsString(List<String> mappingTokens, Map<String,String> params) throws Exception {
+        System.out.println(map);
         String className = getMappingFor( mappingTokens );
         if(className == null) {
             throw new ServiceMappingDoesNotExist("Mapping for " + mappingTokens.toString() + " does not exist");

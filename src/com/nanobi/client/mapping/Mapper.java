@@ -33,8 +33,9 @@ public class Mapper {
 		// list of mappings for All Students
 		List<String> allStudentsMapping1 = Arrays.asList("all", "students");
 		List<String> allStudentsMapping2 = Arrays.asList("every", "student");
+		List<String> allStudentsMapping3 = Arrays.asList("students");
 		
-		List<List<String>> mappingsForAllStudents = Arrays.asList(allStudentsMapping1,allStudentsMapping2);
+		List<List<String>> mappingsForAllStudents = Arrays.asList(allStudentsMapping1,allStudentsMapping2,allStudentsMapping3);
 		map.put(mappingsForAllStudents, allStudentsClassName);
 		
 		

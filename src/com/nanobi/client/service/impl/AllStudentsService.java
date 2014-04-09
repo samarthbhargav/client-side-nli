@@ -11,6 +11,7 @@ import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
 import com.nanobi.client.service.model.ServiceRequest;
 import com.nanobi.client.service.model.ServiceResponse;
+import com.nanobi.client.utils.Utils;
 
 /**
  * @author hduser
@@ -43,14 +44,20 @@ public class AllStudentsService implements IService {
 	public String getResponseAsString(ServiceRequest request) throws Exception {
 		ServiceResponse response = this.service(request);
 		List<Student> students = (List<Student>) response.getParam(PARAM_STUDENT_LIST);
-		StringBuilder ret = new StringBuilder();
-		for(Student s : students) {
-			ret.append(formatStudent(s) + "<br/>\n");
+		if(students == null || students.size() == 0) {
+		    return "No Students Found";
 		}
+		StringBuilder ret = new StringBuilder();
+		ret.append( "<table class=\"table table-striped table-condensed\">" );
+		ret.append( Utils.getHeadersForTable( students.get( 0 ) ) );
+		for(Student s : students) {
+			ret.append(Utils.formatStudent(s));
+		}
+		ret.append( "</table>" );
 		return ret.toString();
 	}
 	
-	private String formatStudent(Student s) {
-		return s.toString();
-	}
+	
+	
+	
 }

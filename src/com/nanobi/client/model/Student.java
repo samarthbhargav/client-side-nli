@@ -1,7 +1,9 @@
 package com.nanobi.client.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.constants.ResultClass;
@@ -57,6 +59,22 @@ public class Student
     }
 
 
+    public Set<String> getAllSubjects() {
+        return scores.keySet();
+    }
+    
+    public Set<String> getSubjectsWithSuffix(String suffix) {
+        Set<String> allSubjects = new HashSet<String>(scores.keySet());
+        Set<String> suffixedSubjects = new HashSet<String>();
+        for(String subj : allSubjects) {
+            if(subj.endsWith( suffix )) {
+                suffixedSubjects.add( subj );
+            }
+        }
+        return suffixedSubjects;
+    }
+    
+    
     public void clearScores()
     {
         scores.clear();
