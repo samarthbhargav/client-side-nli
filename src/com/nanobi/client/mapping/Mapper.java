@@ -27,17 +27,18 @@ public class Mapper {
 	private static void initMap() {
 		map.clear();
 		
-		
 		// For All Students Class Name
 		String allStudentsClassName = AllStudentsService.class.getName();
+		
+		// list of mappings for All Students
 		List<String> allStudentsMapping1 = Arrays.asList("all", "students");
+		List<String> allStudentsMapping2 = Arrays.asList("every", "student");
 		
-		
-		
-		List<List<String>> mappingsForAllStudents = Arrays.asList(allStudentsMapping1);
+		List<List<String>> mappingsForAllStudents = Arrays.asList(allStudentsMapping1,allStudentsMapping2);
 		map.put(mappingsForAllStudents, allStudentsClassName);
 		
-	
+		
+		// 
 	}
 	
 	
@@ -57,8 +58,6 @@ public class Mapper {
 	}
 	
 	
-	public static void main(String[] args) {
-		Mapper mapper = Mapper.getInstance();
-		
+	public static void main(String[] args) {		
 	}
 }
