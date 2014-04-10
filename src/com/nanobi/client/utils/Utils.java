@@ -5,6 +5,7 @@ package com.nanobi.client.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import com.nanobi.client.communication.TranslationResult;
@@ -46,7 +47,7 @@ public class Utils
     {
         StringBuilder builder = new StringBuilder();
         builder.append( "<tr>" );
-        builder.append( tdColspan( strong( "Name: " ) + s.getName(), 2 ) );
+        builder.append( tdColspan( strong( "Name: " ) + s.getName(), 1 ) );
         builder.append( tdColspan( strong( "USN: " ) + s.getUsn(), 2 ) );
         builder.append( tdColspan( strong( "Total: " ) + s.getTotal().toString(), 2 ) );
         builder.append( tdColspan( strong( "Percentage: " ) + s.getPercentage( StudentDaoConstants.MARKS_MAX ).toString(), 2 ) );
@@ -56,9 +57,10 @@ public class Utils
         ArrayList<String> allsubjects = new ArrayList<String>( s.getSubjectsWithSuffix( StudentDaoConstants.TOTAL_SUFFIX ) );
         Collections.sort( allsubjects );
         for ( String subj : allsubjects ) {
-            builder.append( td( strong(subj) + s.getScore( subj ).toString() ) );
+            builder.append( td( strong(subj.replace( "_TOT", "" )) + ": "+ s.getScore( subj ).toString() ) );
         }
         builder.append( "</tr>\n" );
+        builder.append( "<tr class=\"tablesep\"></tr>" );
         return builder.toString();
     }
 
@@ -80,7 +82,7 @@ public class Utils
         return builder.toString();
     }*/
 
-    public static String strong( String str )
+    private static String strong( String str )
     {
         return "<strong>" + str + "</strong>";
     }
@@ -101,5 +103,16 @@ public class Utils
     private static String th( String str )
     {
         return "<th>" + str + "</th>";
+    }
+    
+    public static String formatStudentsAsTable(List<Student> students) {
+        StringBuilder ret = new StringBuilder();
+        ret.append( "<table class=\"table table-bordered table-condensed student-table\">" );
+        for(Student s : students) {
+            ret.append(Utils.formatStudent(s));
+            
+        }
+        ret.append( "</table>" );
+        return ret.toString();
     }
 }

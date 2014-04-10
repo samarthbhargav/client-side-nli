@@ -36,8 +36,6 @@
 			} else {
 			    if(dao.authenticate( uname, pass )) {
 			        session.setAttribute( Params.SESSION_CRED_USERNAME, uname );
-			        //TODO probably find a better place for this?
-			        Mapper.loadMappings(  );
 			        response.sendRedirect( "dashboard.jsp" );
 			        return;
 			    } else {

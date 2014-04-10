@@ -47,17 +47,6 @@ public class AllStudentsService implements IService {
 		if(students == null || students.size() == 0) {
 		    return "No Students Found";
 		}
-		StringBuilder ret = new StringBuilder();
-		ret.append( "<table class=\"table table-striped table-condensed\">" );
-		ret.append( Utils.getHeadersForTable( students.get( 0 ) ) );
-		for(Student s : students) {
-			ret.append(Utils.formatStudent(s));
-		}
-		ret.append( "</table>" );
-		return ret.toString();
+		return Utils.formatStudentsAsTable(students);
 	}
-	
-	
-	
-	
 }

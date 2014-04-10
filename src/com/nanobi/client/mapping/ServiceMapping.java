@@ -12,14 +12,19 @@ import com.nanobi.client.service.model.ServiceResponse;
 
 public class ServiceMapping
 {
-    private static final ServiceMapping INSTANCE = new ServiceMapping();
+    private static ServiceMapping INSTANCE;
     
 	private static Map<List<String>, String> map = new HashMap<List<String>, String>();
     
     private ServiceMapping() {
+        
     }
     
-    public static ServiceMapping getInstance() { 
+    public static ServiceMapping getInstance() {
+        if(INSTANCE == null) {
+            INSTANCE = new ServiceMapping();
+            Mapper.loadMappings();
+        }
     	return INSTANCE;
     }
     
