@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.nanobi.client.communication.TranslationResult;
+import com.nanobi.client.constants.ResultClass;
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.model.Student;
 
@@ -57,7 +58,7 @@ public class Utils
         ArrayList<String> allsubjects = new ArrayList<String>( s.getSubjectsWithSuffix( StudentDaoConstants.TOTAL_SUFFIX ) );
         Collections.sort( allsubjects );
         for ( String subj : allsubjects ) {
-            builder.append( td( strong(subj.replace( "_TOT", "" )) + ": "+ s.getScore( subj ).toString() ) );
+            builder.append( td( strong( subj.replace( "_TOT", "" ) ) + ": " + s.getScore( subj ).toString() ) );
         }
         builder.append( "</tr>\n" );
         builder.append( "<tr class=\"tablesep\"></tr>" );
@@ -104,15 +105,66 @@ public class Utils
     {
         return "<th>" + str + "</th>";
     }
-    
-    public static String formatStudentsAsTable(List<Student> students) {
+
+
+    public static String formatStudentsAsTable( List<Student> students )
+    {
         StringBuilder ret = new StringBuilder();
         ret.append( "<table class=\"table table-bordered table-condensed student-table\">" );
-        for(Student s : students) {
-            ret.append(Utils.formatStudent(s));
-            
+        for ( Student s : students ) {
+            ret.append( Utils.formatStudent( s ) );
+
         }
         ret.append( "</table>" );
         return ret.toString();
     }
+
+
+    public static String getSummary( List<Student> students )
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append( "<div class=\"result-div\" style=\" padding: 3% \" >" );
+        builder.append( "<h3> Summary </h3>" );
+        builder.append( "Total Number of students: " + students.size() + "<br/>" );
+        ResultClass[] classes = { ResultClass.FIRST_CLASS_DISCTINCTION, ResultClass.FIRST_CLASS, ResultClass.SECOND_CLASS,
+            ResultClass.THIRD_CLASS, ResultClass.FAIL };
+        for ( ResultClass c : classes ) {
+            builder.append( "Number of Students who scored " + c + " class : " + countStudentsWithClass( students, c )
+                + "<br/>" );
+        }
+        builder.append( "</div>" );
+        return builder.toString();
+    }
+
+
+    public static int countStudentsWithClass( List<Student> students, ResultClass c )
+    {
+        int count = 0;
+        for ( Student s : students ) {
+            if ( s.getResultClass() == c )
+                count++;
+        }
+        return count;
+    }
+
+
+    public static int getNumberofNumbers( String str )
+    {
+        String[] splitOnNumbers = str.replace( " ", "" ).split( "[0-9]+" );
+        return splitOnNumbers.length;
+    }
+
+
+    /*public static Double[] extractNumbers( String str )
+    {
+        Double[] arr = null;
+        int n = 0;
+        if ( ( n = Utils.getNumberofNumbers( str ) ) > 0 ) {
+            arr = new Double[n];
+            for(String sub : str.split(" ")) {
+                if()
+            }
+        }
+        return arr;
+    }*/
 }
