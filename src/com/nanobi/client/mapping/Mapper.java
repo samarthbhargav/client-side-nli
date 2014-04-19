@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.nanobi.client.service.impl.AllStudentsService;
+import com.nanobi.client.service.impl.StudentPercentageService;
 
 public class Mapper {
 	
@@ -38,7 +40,15 @@ public class Mapper {
 		map.put(mappingsForAllStudents, allStudentsClassName);
 		
 		
-		// 
+		// for percentage services
+		String percentClassName = StudentPercentageService.class.getName();
+		List<String> percentMapping1 = Arrays.asList("above N percent");
+		List<String> percentMapping2 = Arrays.asList("below N percent");
+		List<String> percentMapping3 = Arrays.asList("above N percent", "below N percent");
+		List<List<String>> mappingsForPercent= Arrays.asList(percentMapping1,percentMapping2,percentMapping3);
+		map.put( mappingsForPercent, percentClassName );
+		
+		
 	}
 	
 	

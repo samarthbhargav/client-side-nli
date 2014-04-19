@@ -2,8 +2,11 @@ package com.nanobi.client.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.nanobi.client.communication.TranslationResult;
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
@@ -79,4 +82,23 @@ public class StudentPercentageService implements IService{
 		List<String> list = Arrays.asList(PARAM_LOWER_BOUND,PARAM_UPPER_BOUND);
 		return list;
 	}
+
+    @Override
+    public Map<String, String> extactParamsFromString( TranslationResult res)
+    {
+        Map<String,String> map = new HashMap<String,String>();
+        Map<String,String> filters = res.getFilters();
+        for(String filter : filters.keySet()) {
+            String value = filters.get( filter );
+            if(filter.contains( "above N percent" )) {
+                map.put( PARAM_LOWER_BOUND, Utils.extractNumbers( value )[0].toString());
+            } else if(filter.contains( "below N percent" )) {
+                map.put( PARAM_UPPER_BOUND, Utils.extractNumbers( value )[0].toString());
+            }
+        }
+        return map;
+    }
+	
+	
+	
 }

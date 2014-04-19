@@ -14,11 +14,17 @@
         return;
     }
 
-	CommunicationServlet comm = new CommunicationServlet();
-	TranslationResult result = comm.getTranslation( request.getParameter( Params.NLI_PARAM_QUERY ) );
-	ArrayList<String> mappings = Utils.constructMappingFromResult(result);
-	ServiceMapping mapper = ServiceMapping.getInstance();
-	String resultString = mapper.getServiceResponseAsString(mappings, null);
+    CommunicationServlet comm = new CommunicationServlet();
+    TranslationResult result = comm.getTranslation( request.getParameter( Params.NLI_PARAM_QUERY ) );
+    ArrayList<String> mappings = Utils.constructMappingFromResult( result );
+    ServiceMapping mapper = ServiceMapping.getInstance();
+    String resultString = "";
+    try {
+        resultString = mapper.getServiceResponseAsString( mappings, null );
+    } catch ( Exception e ) {
+		resultString = e.getMessage(  );
+		resultString += "\n<br> Your Query Could not be answered";
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,14 +46,14 @@
 <title>Results | NLI Client</title>
 </head>
 <body>
-<div class="container" >
-	<div class="row">	
-		<div class="col-md-12 white-bg" >
-			<a href="dashboard.jsp">Go Back to Dashboard</a>
-			<h2 class="text-center">Results of Query: </h2>
-			<%=	resultString %>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 white-bg">
+				<a href="dashboard.jsp">Go Back to Dashboard</a>
+				<h2 class="text-center">Results of Query:</h2>
+				<%=resultString%>
+			</div>
 		</div>
-	</div> 
-</div>
+	</div>
 </body>
 </html>

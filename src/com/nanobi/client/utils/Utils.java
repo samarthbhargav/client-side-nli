@@ -66,22 +66,7 @@ public class Utils
     }
 
 
-    /*public static String getHeadersForTable(Student s) {
-        StringBuilder builder = new StringBuilder();
-        builder.append( "<tr>" );
-        builder.append( th("Name") );
-        builder.append( th("USN") );
-        ArrayList<String> allsubjects  = new ArrayList<String>(s.getSubjectsWithSuffix( StudentDaoConstants.TOTAL_SUFFIX ));
-        Collections.sort( allsubjects );
-        for(String subj : allsubjects) {
-            builder.append( th(subj) );
-        }
-        builder.append( th("Total") );
-        builder.append( th("Percentage") );
-        builder.append( th("Class") );
-        builder.append( "</tr>" );
-        return builder.toString();
-    }*/
+   
 
     private static String strong( String str )
     {
@@ -155,16 +140,20 @@ public class Utils
     }
 
 
-    /*public static Double[] extractNumbers( String str )
+    public static Double[] extractNumbers( String str )
     {
         Double[] arr = null;
         int n = 0;
         if ( ( n = Utils.getNumberofNumbers( str ) ) > 0 ) {
             arr = new Double[n];
+            int i = 0;
             for(String sub : str.split(" ")) {
-                if()
+                if(sub.matches( "[0-9]+([.,;'\"])?" )) {
+                    String num = sub.replaceAll( "[^0-9]", "" );
+                    arr[i++] = Double.parseDouble( num );
+                }
             }
         }
         return arr;
-    }*/
+    }
 }

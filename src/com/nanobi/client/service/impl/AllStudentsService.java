@@ -4,8 +4,11 @@
 package com.nanobi.client.service.impl;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.nanobi.client.communication.TranslationResult;
 import com.nanobi.client.dao.StudentDao;
 import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
@@ -59,6 +62,13 @@ public class AllStudentsService implements IService
         b.append( Utils.getSummary( students ) );
         b.append( Utils.formatStudentsAsTable( students ) );
         return b.toString();
+    }
+
+
+    @Override
+    public Map<String, String> extactParamsFromString( TranslationResult res )
+    {
+        return new HashMap<String,String>();
     }
     
     
