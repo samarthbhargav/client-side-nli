@@ -3,7 +3,7 @@ package com.nanobi.client.constants;
 public enum ResultClass
 {
 
-    FIRST_CLASS_DISCTINCTION( 100.0, 70.0 ), FIRST_CLASS( 69.999, 60.0 ), SECOND_CLASS( 59.999, 50.00 ), THIRD_CLASS( 49.999,
+    FIRST_CLASS_DISCTINCTION( 100.0, 70.0 ), FIRST_CLASS( 69.999, 60.0 ), SECOND_CLASS( 59.999, 50.00 ), PASS( 49.999,
         35.00 ), FAIL( 34.9999, 0.0 );
 
     private double lower;
@@ -38,8 +38,8 @@ public enum ResultClass
             return FIRST_CLASS;
         } else if ( score >= SECOND_CLASS.lower ) {
             return SECOND_CLASS;
-        } else if ( score >= THIRD_CLASS.lower ) {
-            return THIRD_CLASS;
+        } else if ( score >= PASS.lower ) {
+            return PASS;
         } else {
             return FAIL;
         }

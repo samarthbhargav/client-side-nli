@@ -18,10 +18,10 @@ public class ResultClassTest
         Assert.assertTrue( c == ResultClass.FAIL );
         
         c = ResultClass.getClassForScore( 35.00 );
-        Assert.assertTrue( c == ResultClass.THIRD_CLASS );
+        Assert.assertTrue( c == ResultClass.PASS );
         
         c = ResultClass.getClassForScore( 49.999 );
-        Assert.assertTrue( c == ResultClass.THIRD_CLASS );
+        Assert.assertTrue( c == ResultClass.PASS);
         
         c = ResultClass.getClassForScore( 50.0 );
         Assert.assertTrue( c == ResultClass.SECOND_CLASS );
@@ -45,7 +45,8 @@ public class ResultClassTest
     
     @Test
     public void test2() {
-        
+        ResultClass c = ResultClass.valueOf( "PASS" );
+        System.out.println(c);
     }
 
 }

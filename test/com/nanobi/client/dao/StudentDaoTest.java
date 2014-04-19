@@ -23,7 +23,7 @@ public class StudentDaoTest
         
         Assert.assertTrue( 
             dao.getStudentsWithClass( ResultClass.FAIL ).size() +
-            dao.getStudentsWithClass( ResultClass.THIRD_CLASS ).size() +
+            dao.getStudentsWithClass( ResultClass.PASS ).size() +
             dao.getStudentsWithClass( ResultClass.SECOND_CLASS ).size() + 
             dao.getStudentsWithClass( ResultClass.FIRST_CLASS ).size() + 
             dao.getStudentsWithClass( ResultClass.FIRST_CLASS_DISCTINCTION ).size() == 111 );

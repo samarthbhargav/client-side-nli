@@ -112,7 +112,7 @@ public class Utils
         builder.append( "<h3> Summary </h3>" );
         builder.append( "Total Number of students: " + students.size() + "<br/>" );
         ResultClass[] classes = { ResultClass.FIRST_CLASS_DISCTINCTION, ResultClass.FIRST_CLASS, ResultClass.SECOND_CLASS,
-            ResultClass.THIRD_CLASS, ResultClass.FAIL };
+            ResultClass.PASS, ResultClass.FAIL };
         for ( ResultClass c : classes ) {
             builder.append( "Number of Students who scored " + c + " class : " + countStudentsWithClass( students, c )
                 + "<br/>" );
