@@ -45,7 +45,10 @@ public class Mapper {
 		List<String> percentMapping1 = Arrays.asList("above N percent");
 		List<String> percentMapping2 = Arrays.asList("below N percent");
 		List<String> percentMapping3 = Arrays.asList("above N percent", "below N percent");
-		List<List<String>> mappingsForPercent= Arrays.asList(percentMapping1,percentMapping2,percentMapping3);
+		List<String> percentMapping4 = Arrays.asList("above N percent","students");
+        List<String> percentMapping5 = Arrays.asList("below N percent","students");
+        List<String> percentMapping6 = Arrays.asList("above N percent", "below N percent","students");
+		List<List<String>> mappingsForPercent= Arrays.asList(percentMapping1,percentMapping2,percentMapping3,percentMapping4,percentMapping5,percentMapping6);
 		map.put( mappingsForPercent, percentClassName );
 		
 		

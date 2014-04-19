@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nanobi.client.communication.TranslationResult;
 import com.nanobi.client.except.ServiceMappingDoesNotExist;
 import com.nanobi.client.service.IService;
 import com.nanobi.client.service.model.ServiceRequest;
@@ -43,20 +44,22 @@ public class ServiceMapping
     }
     
     @SuppressWarnings ( "unchecked")
-    public ServiceResponse getService(List<String> mappingTokens, Map<String,String> params) throws Exception { // TODO remove generic exception
+    public ServiceResponse getService(List<String> mappingTokens, TranslationResult result) throws Exception { // TODO remove generic exception
+        
         String className = getMappingFor( mappingTokens );
         if(className == null) {
             throw new ServiceMappingDoesNotExist("Mapping for " + mappingTokens.toString() + " does not exist");
         }
         Class<IService> cl = (Class<IService>) Class.forName( className );
         IService service = (IService) cl.newInstance();
+        Map<String,String> params = service.extactParamsFromString( result );
         ServiceRequest req = new ServiceRequest(params);
         ServiceResponse response = service.service( req );
         return response;
     }
     
     @SuppressWarnings ( "unchecked")
-    public String getServiceResponseAsString(List<String> mappingTokens, Map<String,String> params) throws Exception {
+    public String getServiceResponseAsString(List<String> mappingTokens, TranslationResult result) throws Exception {
         System.out.println(map);
         String className = getMappingFor( mappingTokens );
         if(className == null) {
@@ -64,6 +67,8 @@ public class ServiceMapping
         }
         Class<IService> cl = (Class<IService>) Class.forName( className );
         IService service = (IService) cl.newInstance();
+        Map<String,String> params = service.extactParamsFromString( result );
+        System.out.println(className + ":" +params);
         ServiceRequest req = new ServiceRequest(params);
         String response = service.getResponseAsString( req );
         return response;

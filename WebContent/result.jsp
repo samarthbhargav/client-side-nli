@@ -20,7 +20,7 @@
     ServiceMapping mapper = ServiceMapping.getInstance();
     String resultString = "";
     try {
-        resultString = mapper.getServiceResponseAsString( mappings, null );
+        resultString = mapper.getServiceResponseAsString( mappings, result );
     } catch ( Exception e ) {
 		resultString = e.getMessage(  );
 		resultString += "\n<br> Your Query Could not be answered";

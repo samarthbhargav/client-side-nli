@@ -88,12 +88,13 @@ public class StudentPercentageService implements IService{
     {
         Map<String,String> map = new HashMap<String,String>();
         Map<String,String> filters = res.getFilters();
+        System.out.println(filters);
         for(String filter : filters.keySet()) {
             String value = filters.get( filter );
-            if(filter.contains( "above N percent" )) {
-                map.put( PARAM_LOWER_BOUND, Utils.extractNumbers( value )[0].toString());
-            } else if(filter.contains( "below N percent" )) {
-                map.put( PARAM_UPPER_BOUND, Utils.extractNumbers( value )[0].toString());
+            if(value.equals( "above N percent" )) {
+                map.put( PARAM_LOWER_BOUND, Utils.extractNumbers( filter )[0].toString());
+            } else if(value.equals( "below N percent" )) {
+                map.put( PARAM_UPPER_BOUND, Utils.extractNumbers( filter )[0].toString());
             }
         }
         return map;
