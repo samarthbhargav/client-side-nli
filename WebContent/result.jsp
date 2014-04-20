@@ -18,10 +18,11 @@
     TranslationResult result = comm.getTranslation( request.getParameter( Params.NLI_PARAM_QUERY ) );
     ArrayList<String> mappings = Utils.constructMappingFromResult( result );
     ServiceMapping mapper = ServiceMapping.getInstance();
-    String resultString = "";
+    String resultString = null;
     try {
         resultString = mapper.getServiceResponseAsString( mappings, result );
     } catch ( Exception e ) {
+        e.printStackTrace(  );
 		resultString = e.getMessage(  );
 		resultString += "\n<br> Your Query Could not be answered";
     }

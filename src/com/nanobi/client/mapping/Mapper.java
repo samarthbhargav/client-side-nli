@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.nanobi.client.service.impl.AllStudentsService;
 import com.nanobi.client.service.impl.StudentPercentageService;
+import com.nanobi.client.service.impl.StudentsWithClassService;
+import com.nanobi.client.service.impl.TopStudentsService;
 
 public class Mapper {
 	
@@ -52,6 +54,21 @@ public class Mapper {
 		map.put( mappingsForPercent, percentClassName );
 		
 		
+		String studentClassName = StudentsWithClassService.class.getName();
+		List<String> classMapping1 = Arrays.asList("class");
+		List<String> classMapping2 = Arrays.asList("students","class");
+		List<String> classMapping3 = Arrays.asList("all", "students","class");
+		List<List<String>> mappingsForClass= Arrays.asList(classMapping1,classMapping2,classMapping3);
+		map.put( mappingsForClass, studentClassName );
+		
+		
+		String topNClassName =TopStudentsService.class.getName();
+		List<String> topNMapping1 = Arrays.asList( "top" );
+		List<String> topNMapping2 = Arrays.asList( "top", "students" );
+//		List<String> topNMapping3 = Arrays.asList( "top" );
+		List<List<String>> mappingsForTop= Arrays.asList(topNMapping1,topNMapping2);
+        map.put( mappingsForTop, topNClassName);
+        
 	}
 	
 	
@@ -65,12 +82,6 @@ public class Mapper {
 			for(List<String> mapping : mappings) {
 				serviceMapper.setMapping(mapping, service );
 			}
-		}
-		System.out.println("Built Service Mapper: ");
-		System.out.println(serviceMapper.toString());
-	}
-	
-	
-	public static void main(String[] args) {		
+		}		
 	}
 }

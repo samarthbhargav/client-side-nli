@@ -2,6 +2,7 @@ package com.nanobi.client.dao;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.mongodb.DBCollection;
@@ -68,5 +69,15 @@ public class StudentDao {
 	
 	public List<Student> getStudents() {
 		return students; 
+	}
+	
+	
+	public List<Student> getTopNStudents(int n) {
+	    List<Student> top = new ArrayList<Student>();
+	    for(Student s : students) {
+	        top.add( s );
+	    }
+	    Collections.sort( top, Student.getTotalMarksComparator() );	    
+	    return top.subList( 0, n );
 	}
 }
