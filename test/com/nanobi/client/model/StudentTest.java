@@ -7,14 +7,13 @@ import java.util.List;
 import org.junit.Test;
 
 import com.nanobi.client.constants.StudentDaoConstants;
-import com.nanobi.client.constants.ResultClass;
 import com.nanobi.client.dao.StudentDao;
 
 
 public class StudentTest
 {
 
-    @Test
+    /*@Test
     public void test() throws UnknownHostException
     {
         StudentDao dao = new StudentDao();
@@ -24,6 +23,6 @@ public class StudentTest
         	System.out.println(s.getResultClass());
         	System.out.println();
         }
-    }
+    }*/
 
 }

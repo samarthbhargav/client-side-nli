@@ -3,6 +3,7 @@
  */
 package com.nanobi.client.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Map.Entry;
 
 import com.nanobi.client.communication.TranslationResult;
 import com.nanobi.client.constants.ResultClass;
+import com.nanobi.client.constants.Semester;
+import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.dao.StudentDao;
 import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
@@ -28,7 +31,7 @@ public class StudentsWithClassService implements IService
 
     public static final String PARAM_CLASS = "class";
     public static final String PARAM_STUDENT_LIST = "students";
-
+    public static final String PARAM_SEMESTER = "semester";
 
     private static ResultClass mapClass( String cls )
     {
@@ -58,7 +61,7 @@ public class StudentsWithClassService implements IService
     {
         ResultClass cls = ResultClass.valueOf( request.getParam( PARAM_CLASS ).toString() );
         StudentDao dao = new StudentDao();
-        List<Student> students = dao.getStudentsWithClass( cls );
+        List<Student> students = dao.getStudentsWithClass( cls , Semester.valueOf( request.getParam( PARAM_SEMESTER ).toString() ));
         ServiceResponse response = new ServiceResponse();
         response.setParam( PARAM_STUDENT_LIST, students );
         return response;
@@ -99,12 +102,24 @@ public class StudentsWithClassService implements IService
     {
         Map<String, String> map = new HashMap<String, String>();
         Map<String, String> dimensions = res.getDimensions();
+        List<String> identified = new ArrayList<String>();
         for ( Entry<String, String> entry : dimensions.entrySet() ) {
             ResultClass cls = mapClass( entry.getKey() );
             if ( cls != null ) {
-                map.put( PARAM_CLASS, cls.toString() );
+                identified.add( cls.toString() );
+                break;
             }
         }
+        String max = null;
+        for(String id : identified) {
+            if(max == null) {
+                max = id;
+            } else if (max.length() < id.toString().length()) {
+                max = id;
+            }
+        }
+        map.put( PARAM_CLASS, max );
+        map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
         return map;
     }
 

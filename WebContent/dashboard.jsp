@@ -34,7 +34,8 @@
 		</div>
 		<div class="col-md-8 white-bg" >
 			<a href="logout.jsp" >Logout</a> <br/>
-			<h2 class="text-center">Natural Language - Student Query System Dashboard</h2>
+			<h2 class="text-center">Natural Language Processing - Voice Driven System</h2>
+			<h3 class="text-center">A Generic Named Entity Recognition Engine with multiple namespaces</h3>
 			<form class="form-signin" role="form" action="result.jsp" method="post">
 					<input id="query" name="query" type="text" class="form-control" placeholder="Speak or Type your query" required="" autofocus="" x-webkit-speech>
 					<br> 

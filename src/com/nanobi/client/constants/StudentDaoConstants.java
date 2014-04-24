@@ -15,6 +15,10 @@ public class StudentDaoConstants {
 	
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_USN = "usn";
+	public static final String FIELD_SEMESTER = "semester";
+	
+	
+	public static final Semester DEFAULT_SEMESTER = Semester.III;
 	
 	
 	// All subjects

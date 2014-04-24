@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.nanobi.client.communication.TranslationResult;
+import com.nanobi.client.constants.Semester;
 import com.nanobi.client.dao.StudentDao;
 import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
@@ -25,6 +26,7 @@ public class TopStudentsService implements IService {
 
     public static final String PARAM_TOP = "top";
     public static final String PARAM_STUDENT_LIST = "students";
+    public static final String PARAM_SEMESTER = "semester";
     
 	/* (non-Javadoc)
 	 * @see com.nanobi.client.service.IService#service(com.nanobi.client.service.model.ServiceRequest)
@@ -34,7 +36,7 @@ public class TopStudentsService implements IService {
 	    ServiceResponse response = new ServiceResponse();
 	    int n = (int)Double.parseDouble( request.getParam( PARAM_TOP ).toString() );
 	    StudentDao dao = new StudentDao();
-	    List<Student> top = dao.getTopNStudents( n );
+	    List<Student> top = dao.getTopNStudents( n , Semester.valueOf( request.getParam( PARAM_SEMESTER ).toString() ));
 	    response.setParam( PARAM_STUDENT_LIST, top );
 	    return response;
 	}
@@ -61,7 +63,7 @@ public class TopStudentsService implements IService {
 	 */
 	@Override
 	public List<String> getParamMap() {
-	    return Arrays.asList( PARAM_STUDENT_LIST, PARAM_TOP );
+	    return Arrays.asList( PARAM_STUDENT_LIST, PARAM_TOP , PARAM_SEMESTER);
 	}
 
     @Override
@@ -74,6 +76,7 @@ public class TopStudentsService implements IService {
                 params.put(PARAM_TOP, Utils.extractNumbers( entry.getKey() )[0].toString());
             }
         }
+        params.put( PARAM_SEMESTER, Semester.III.toString() );
         return params;
     }
 

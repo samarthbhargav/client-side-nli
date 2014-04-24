@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.nanobi.client.communication.TranslationResult;
+import com.nanobi.client.constants.Semester;
+import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.dao.StudentDao;
 import com.nanobi.client.model.Student;
 import com.nanobi.client.service.IService;
@@ -25,12 +27,12 @@ public class AllStudentsService implements IService
 {
 
     public static final String PARAM_STUDENT_LIST = "students";
-
+    public static final String PARAM_SEMESTER = "semester";
 
     @Override
     public List<String> getParamMap()
     {
-        String[] params = { PARAM_STUDENT_LIST };
+        String[] params = { PARAM_STUDENT_LIST , PARAM_SEMESTER};
         return Arrays.asList( params );
     }
 
@@ -42,7 +44,8 @@ public class AllStudentsService implements IService
     public ServiceResponse service( ServiceRequest request ) throws Exception
     {
         StudentDao dao = new StudentDao();
-        List<Student> students = dao.getStudents();
+        Semester sem = Semester.valueOf( request.getParam( PARAM_SEMESTER ).toString() );
+        List<Student> students = dao.getStudents(sem);
         ServiceResponse response = new ServiceResponse();
         response.setParam( PARAM_STUDENT_LIST, students );
         return response;
@@ -68,7 +71,9 @@ public class AllStudentsService implements IService
     @Override
     public Map<String, String> extactParamsFromString( TranslationResult res )
     {
-        return new HashMap<String,String>();
+        Map<String,String> map = new HashMap<String,String>();
+        map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
+        return map;
     }
     
     

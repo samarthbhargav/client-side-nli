@@ -6,10 +6,10 @@ package com.nanobi.client.utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import com.nanobi.client.communication.TranslationResult;
 import com.nanobi.client.constants.ResultClass;
+import com.nanobi.client.constants.Semester;
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.model.Student;
 
@@ -86,6 +86,7 @@ public class Utils
     }
 
 
+    @SuppressWarnings ( "unused")
     private static String th( String str )
     {
         return "<th>" + str + "</th>";
@@ -155,5 +156,10 @@ public class Utils
             }
         }
         return arr;
+    }
+    
+    
+    public static Semester getSemester(String str) {
+        return Semester.III;
     }
 }

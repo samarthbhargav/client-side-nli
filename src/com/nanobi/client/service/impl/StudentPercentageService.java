@@ -20,6 +20,7 @@ public class StudentPercentageService implements IService{
     public static final String PARAM_LOWER_BOUND = "lower_bound" ;
 
     public static final String PARAM_STUDENT_LIST = "students";
+    public static final String PARAM_SEMESTER = "semester";
     
 	@SuppressWarnings ( "unchecked")
     @Override
@@ -27,7 +28,7 @@ public class StudentPercentageService implements IService{
 	    String upper = (String) request.getParam( PARAM_UPPER_BOUND );
 	    String lower = (String) request.getParam( PARAM_LOWER_BOUND );
 		
-	    ServiceResponse resp = new AllStudentsService().service( null );
+	    ServiceResponse resp = new AllStudentsService().service( request );
         List<Student> allStudents = (List<Student>) resp.getParam( AllStudentsService.PARAM_STUDENT_LIST );
         List<Student> reqdStudents = new ArrayList<Student>();
 	    
@@ -97,6 +98,7 @@ public class StudentPercentageService implements IService{
                 map.put( PARAM_UPPER_BOUND, Utils.extractNumbers( filter )[0].toString());
             }
         }
+        map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString());
         return map;
     }
 	

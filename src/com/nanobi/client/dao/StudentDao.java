@@ -9,6 +9,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.nanobi.client.constants.Semester;
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.constants.ResultClass;
 import com.nanobi.client.model.Student;
@@ -41,6 +42,7 @@ public class StudentDao {
 		Student student = new Student();
 		student.setName(getFieldOrNull(object, StudentDaoConstants.FIELD_NAME));
 		student.setUsn(getFieldOrNull(object, StudentDaoConstants.FIELD_USN));
+		student.setSemester( Semester.getSemester( getFieldOrNull( object, StudentDaoConstants.FIELD_SEMESTER) ) );
 		for(String subject: StudentDaoConstants.SUBJECTS_LIST) {
 			student.addScore(subject, getScoreForSubject(object, subject));
 		}
@@ -56,8 +58,8 @@ public class StudentDao {
 	}
 	
 	
-	public List<Student> getStudentsWithClass(ResultClass c) {
-		List<Student> allStudents = getStudents();
+	public List<Student> getStudentsWithClass(ResultClass c, Semester semester) {
+		List<Student> allStudents = getStudents(semester);
 		List<Student> students = new ArrayList<Student>();
 		for(Student s: allStudents) {
 		    if(c == s.getResultClass()) {
@@ -67,15 +69,21 @@ public class StudentDao {
 		return students;
 	}
 	
-	public List<Student> getStudents() {
-		return students; 
+	public List<Student> getStudents(Semester semester) {
+	    List<Student> studentList = new ArrayList<Student>();
+	    for(Student s: students) {
+	        if(s.getSemester() == semester)
+	        studentList.add( s );
+	    }
+		return studentList; 
 	}
 	
 	
-	public List<Student> getTopNStudents(int n) {
+	public List<Student> getTopNStudents(int n, Semester sem) {
 	    List<Student> top = new ArrayList<Student>();
 	    for(Student s : students) {
-	        top.add( s );
+	        if(sem == s.getSemester())
+	            top.add( s );
 	    }
 	    Collections.sort( top, Student.getTotalMarksComparator() );	    
 	    return top.subList( 0, n );

@@ -58,14 +58,15 @@ public class Mapper {
 		List<String> classMapping1 = Arrays.asList("class");
 		List<String> classMapping2 = Arrays.asList("students","class");
 		List<String> classMapping3 = Arrays.asList("all", "students","class");
-		List<List<String>> mappingsForClass= Arrays.asList(classMapping1,classMapping2,classMapping3);
+		List<String> classMapping4 = Arrays.asList("class","class");
+		List<String> classMapping5 = Arrays.asList("class", "class","class");
+		List<List<String>> mappingsForClass= Arrays.asList(classMapping1,classMapping2,classMapping3,classMapping4,classMapping5);
 		map.put( mappingsForClass, studentClassName );
 		
 		
 		String topNClassName =TopStudentsService.class.getName();
 		List<String> topNMapping1 = Arrays.asList( "top" );
 		List<String> topNMapping2 = Arrays.asList( "top", "students" );
-//		List<String> topNMapping3 = Arrays.asList( "top" );
 		List<List<String>> mappingsForTop= Arrays.asList(topNMapping1,topNMapping2);
         map.put( mappingsForTop, topNClassName);
         

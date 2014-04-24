@@ -14,7 +14,7 @@ import com.nanobi.client.model.Student;
 public class StudentDaoTest
 {
 
-    @Test
+   /* @Test
     public void test() throws UnknownHostException
     {
         StudentDao dao = new StudentDao();
@@ -41,5 +41,5 @@ public class StudentDaoTest
         System.out.println(students.size()); // TODO VERIFY THIS
         Assert.assertTrue( students.size() == 16 ); 
     }
-
+*/
 }

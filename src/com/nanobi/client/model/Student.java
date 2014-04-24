@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.nanobi.client.constants.Semester;
 import com.nanobi.client.constants.StudentDaoConstants;
 import com.nanobi.client.constants.ResultClass;
 
@@ -14,7 +15,9 @@ public class Student
 {
     private String name;
     private String usn;
-
+    private Semester sem;
+    
+    
     private Map<String, Double> scores;
 
 
@@ -157,5 +160,17 @@ public class Student
 
             }
         };
+    }
+
+
+    public Semester getSemester()
+    {
+        return sem;
+    }
+
+
+    public void setSemester( Semester sem )
+    {
+        this.sem = sem;
     }
 }
