@@ -1,13 +1,13 @@
-<%@page import="com.nanobi.client.service.IService"%>
-<%@page import="com.nanobi.client.mapping.ServiceMapping"%>
+<%@page import="com.oxf.client.service.IService"%>
+<%@page import="com.oxf.client.mapping.ServiceMapping"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.nanobi.client.utils.Utils"%>
-<%@page import="com.nanobi.client.communication.TranslationResult"%>
-<%@page import="com.nanobi.client.communication.CommunicationServlet"%>
+<%@page import="com.oxf.client.utils.Utils"%>
+<%@page import="com.oxf.client.communication.TranslationResult"%>
+<%@page import="com.oxf.client.communication.CommunicationServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="com.nanobi.client.constants.Params"%>
+<%@ page import="com.oxf.client.constants.Params"%>
 <%
     if ( session.getAttribute( Params.SESSION_CRED_USERNAME ) == null ) {
         response.sendRedirect( "login.jsp" );
@@ -24,7 +24,7 @@
     } catch ( Exception e ) {
         e.printStackTrace(  );
 		resultString = e.getMessage(  );
-		resultString += "\n<br> Your Query Could not be answered";
+		resultString += "\n<br> <div id=\"result-div\"> Your Query Could not be answered</div>";
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,6 +38,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link type="text/css" href="css/bootstrap.css" rel="stylesheet">
+<script src="js/speakClient.js"></script>
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -46,15 +47,22 @@
 
 <title>Results | NLI Client</title>
 </head>
-<body>
+<body >
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 white-bg">
 				<a href="dashboard.jsp">Go Back to Dashboard</a>
 				<h2 class="text-center">Results of Query:</h2>
-				<%=resultString%>
+				<div id="result"><%=resultString%></div>
 			</div>
 		</div>
 	</div>
+	<div id="audio"></div>
+	<script>
+		var toSpeak = document.getElementById("result-div").innerHTML;
+		//toSpeak = toSpeak.replace(/<h3>|</h3>|<br>/g, '');
+		toSpeak = toSpeak.replace(/<(?:.|\n)*?>/gm, '');
+		speak(toSpeak);
+	</script>
 </body>
 </html>

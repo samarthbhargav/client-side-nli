@@ -13,7 +13,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link type="text/css" href="css/bootstrap.css" rel="stylesheet">
-
+<script src="js/speakClient.js"></script>
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -22,6 +22,7 @@
 <title>Logged Out | NLI Client</title>
 </head>
 <body>
+	<div id="audio"></div>
 	<form class="form-signin" role="form" >
 		<h2 class="form-signin-heading">Successfully logged out</h2>
 
@@ -31,5 +32,8 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+	speak("You have Logged out. Thank you for using our system");
+	</script>
 </body>
 </html>
