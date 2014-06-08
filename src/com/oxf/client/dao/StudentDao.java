@@ -42,10 +42,11 @@ public class StudentDao {
 		Student student = new Student();
 		student.setName(getFieldOrNull(object, StudentDaoConstants.FIELD_NAME));
 		student.setUsn(getFieldOrNull(object, StudentDaoConstants.FIELD_USN));
-		student.setSemester( Semester.getSemester( getFieldOrNull( object, StudentDaoConstants.FIELD_SEMESTER) ) );
+		student.setSemester( Semester.valueOf( getFieldOrNull( object, StudentDaoConstants.FIELD_SEMESTER) ) );
 		for(String subject: StudentDaoConstants.SUBJECTS_LIST) {
 			student.addScore(subject, getScoreForSubject(object, subject));
 		}
+		System.out.println(student);
 		return student;
 	}
 

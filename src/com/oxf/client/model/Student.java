@@ -16,8 +16,8 @@ public class Student
     private String name;
     private String usn;
     private Semester sem;
-    
-    
+
+
     private Map<String, Double> scores;
 
 
@@ -141,6 +141,7 @@ public class Student
         String SEP = " ";
         builder.append( "Name: " + getName() );
         builder.append( SEP + "USN: " + getUsn() );
+        builder.append( SEP + "Semester: " + getSemester() );
         for ( String s : scores.keySet() ) {
             builder.append( SEP + s + ": " + scores.get( s ) );
         }

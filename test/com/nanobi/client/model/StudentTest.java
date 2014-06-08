@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.nanobi.client.constants.StudentDaoConstants;
-import com.nanobi.client.dao.StudentDao;
+import com.oxf.client.constants.StudentDaoConstants;
+import com.oxf.client.dao.StudentDao;
 
 
 public class StudentTest

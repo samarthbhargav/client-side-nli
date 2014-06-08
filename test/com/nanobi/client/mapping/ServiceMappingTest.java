@@ -7,8 +7,8 @@ package com.nanobi.client.mapping;
 
 import org.junit.Test;
 
-import com.nanobi.client.service.IService;
-import com.nanobi.client.service.impl.AllStudentsService;
+import com.oxf.client.service.IService;
+import com.oxf.client.service.impl.AllStudentsService;
 
 /**
  * @author samarth

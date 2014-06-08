@@ -34,7 +34,7 @@ public class CommunicationServlet {
             if (statusCode != -1) {
                 
                 ObjectMapper mapper = new ObjectMapper();
-                
+                System.out.println(method.getResponseBodyAsString());
                 result = mapper.readValue( method.getResponseBodyAsString(), TranslationResult.class);
             }
 

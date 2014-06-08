@@ -5,6 +5,8 @@ package com.nanobi.client.constants;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.oxf.client.constants.ResultClass;
+
 public class ResultClassTest
 {
 

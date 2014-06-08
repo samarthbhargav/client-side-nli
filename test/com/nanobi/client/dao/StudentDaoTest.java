@@ -1,16 +1,5 @@
 package com.nanobi.client.dao;
 
-
-
-import java.net.UnknownHostException;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.nanobi.client.constants.ResultClass;
-import com.nanobi.client.model.Student;
-
 public class StudentDaoTest
 {
 
@@ -35,10 +24,10 @@ public class StudentDaoTest
         
         students = dao.getStudentsWithClass( ResultClass.FIRST_CLASS );
         System.out.println(students.size());
-        Assert.assertTrue( students.size() == 35 ); // TODO Verify this
+        Assert.assertTrue( students.size() == 35 ); 
         
         students = dao.getStudentsWithClass( ResultClass.SECOND_CLASS );
-        System.out.println(students.size()); // TODO VERIFY THIS
+        System.out.println(students.size()); 
         Assert.assertTrue( students.size() == 16 ); 
     }
 */

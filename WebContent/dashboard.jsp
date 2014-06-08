@@ -48,5 +48,23 @@
 <script>
 speak("I am a Voice Driven Report Generation System. Please Speak or Type the Query into the box and Click the Query Button to proceed");
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+<script>
+if (annyang) {
+  // Let's define our first command. First the text we expect, and then the function it should call
+  var commands = {
+    '*term': function(term) {
+      document.getElementById('query').value = term; 
+    }
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+}
+</script>
 </body>
 </html>

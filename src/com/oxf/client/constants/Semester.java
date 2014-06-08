@@ -15,11 +15,11 @@ public enum Semester
 
     public static Semester getSemester( String sem )
     {
-        if ( sem.equals( "1" ) || sem.equals( "first" ) || sem.equals( "1st" ) || sem.equals( "one" ) ) {
+        if ( sem.equals( "I" ) ||sem.equals( "first semester" ) || sem.equals( "first sem" ) || sem.equals( "I semester" ) || sem.equals( "I sem" ) || sem.equals( "1st sem" ) || sem.equals( "1st semester" )) {
             return I;
-        } else if ( sem.equals( "2" ) || sem.equals( "second" ) || sem.equals( "2nd" ) || sem.equals( "two" ) ) {
+        } else if ( sem.equals( "II" ) ||sem.equals( "second semester" ) || sem.equals( "second sem" ) || sem.equals( "II semester" ) || sem.equals( "II sem" )||sem.equals( "2nd sem" ) || sem.equals( "2nd semester" )) {
             return II;
-        } else if ( sem.equals( "3" ) || sem.equals( "third" ) || sem.equals( "3rd" ) || sem.equals( "three" ) ) {
+        } else if ( sem.equals( "III" ) ||sem.equals( "third semester" ) || sem.equals( "third sem" ) || sem.equals( "III semester" ) || sem.equals( "III sem" ) || sem.equals( "3rd sem" ) || sem.equals( "3rd semester" )) {
             return III;
         } else if ( sem.equals( "4" ) || sem.equals( "fourth" ) || sem.equals( "4th" ) || sem.equals( "four" ) ) {
             return IV;

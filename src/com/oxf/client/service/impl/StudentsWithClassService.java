@@ -33,6 +33,7 @@ public class StudentsWithClassService implements IService
     public static final String PARAM_STUDENT_LIST = "students";
     public static final String PARAM_SEMESTER = "semester";
 
+
     private static ResultClass mapClass( String cls )
     {
 
@@ -61,7 +62,8 @@ public class StudentsWithClassService implements IService
     {
         ResultClass cls = ResultClass.valueOf( request.getParam( PARAM_CLASS ).toString() );
         StudentDao dao = new StudentDao();
-        List<Student> students = dao.getStudentsWithClass( cls , Semester.valueOf( request.getParam( PARAM_SEMESTER ).toString() ));
+        List<Student> students = dao.getStudentsWithClass( cls,
+            Semester.valueOf( request.getParam( PARAM_SEMESTER ).toString() ) );
         ServiceResponse response = new ServiceResponse();
         response.setParam( PARAM_STUDENT_LIST, students );
         return response;
@@ -75,8 +77,7 @@ public class StudentsWithClassService implements IService
     public String getResponseAsString( ServiceRequest request ) throws Exception
     {
         ServiceResponse response = this.service( request );
-        @SuppressWarnings ( "unchecked")
-        List<Student> students = (List<Student>) response.getParam( PARAM_STUDENT_LIST );
+        @SuppressWarnings ( "unchecked") List<Student> students = (List<Student>) response.getParam( PARAM_STUDENT_LIST );
         if ( students == null || students.size() == 0 ) {
             return "No Students Found";
         }
@@ -108,18 +109,25 @@ public class StudentsWithClassService implements IService
             if ( cls != null ) {
                 identified.add( cls.toString() );
                 break;
+            } else {
+                Semester sem = Semester.getSemester( entry.getKey() );
+                if ( sem != null ) {
+                    map.put( PARAM_SEMESTER, sem.toString() );
+                }
             }
         }
         String max = null;
-        for(String id : identified) {
-            if(max == null) {
+        for ( String id : identified ) {
+            if ( max == null ) {
                 max = id;
-            } else if (max.length() < id.toString().length()) {
+            } else if ( max.length() < id.toString().length() ) {
                 max = id;
             }
         }
         map.put( PARAM_CLASS, max );
-        map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
+        if ( !map.containsKey( PARAM_SEMESTER ) ) {
+            map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
+        }
         return map;
     }
 

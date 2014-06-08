@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.oxf.client.communication.TranslationResult;
 import com.oxf.client.constants.Semester;
@@ -72,7 +73,20 @@ public class AllStudentsService implements IService
     public Map<String, String> extactParamsFromString( TranslationResult res )
     {
         Map<String,String> map = new HashMap<String,String>();
-        map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
+        Map<String, String> dims = res.getDimensions();
+        if(dims.size() != 0) {
+            for(Entry<String,String> entry : dims.entrySet()) {
+                if(entry.getValue().equals( "semester" )) {
+                    Semester sem = Semester.getSemester( entry.getKey() );
+                    if(sem != null) {
+                        map.put(PARAM_SEMESTER, sem.toString());
+                    }
+                }
+            }
+        }
+        if(map.size() == 0) {
+            map.put( PARAM_SEMESTER, StudentDaoConstants.DEFAULT_SEMESTER.toString() );
+        }
         return map;
     }
     
